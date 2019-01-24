@@ -1,0 +1,62 @@
+package com.revature.test;
+
+import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mrunit.mapreduce.MapDriver;
+import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
+import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.revature.Q3_Mapper;
+import com.revature.Q3_Reducer;
+
+public class Q3_Test {
+	
+	private MapDriver<LongWritable, Text, Text, DoubleWritable> mapDriver;
+	private ReduceDriver<Text, DoubleWritable, Text, DoubleWritable> reduceDriver;
+	private MapReduceDriver<LongWritable, Text, Text, DoubleWritable, Text, DoubleWritable> mapReduceDriver;
+	
+	@Before
+	public void setUp(){
+		
+		Q3_Mapper mapper = new Q3_Mapper();
+		mapDriver = new MapDriver<LongWritable, Text, Text, DoubleWritable>();
+		mapDriver.setMapper(mapper);
+		
+		Q3_Reducer reducer = new Q3_Reducer();
+		reduceDriver = new ReduceDriver<Text, DoubleWritable, Text, DoubleWritable>();
+		reduceDriver.setReducer(reducer);
+		
+		mapReduceDriver = new MapReduceDriver<LongWritable, Text, Text, DoubleWritable, Text, DoubleWritable>();
+		mapReduceDriver.setMapper(mapper);
+		mapReduceDriver.setReducer(reducer);
+	}
+	
+	@Test
+	public void testMapper(){
+		mapDriver.withInput(new LongWritable(1), new Text("\"Ireland\",\"IRL\",\"Employment to population ratio, 15+, male (%) (modeled ILO estimate)\",\"SL.EMP.TOTL.SP.MA.ZS\","
+				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
+				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"59.8019981384277\",\"58.318000793457\",\"57.5919990539551\",\"58.5379981994629\","
+				+ "\"60.1160011291504\",\"60.4900016784668\",\"61.564998626709\",\"64.2959976196289\",\"66.5940017700195\",\"68\","
+				+ "\"68.6689987182617\",\"67.7210006713867\",\"67.5339965820313\",\"68.0029983520508\",\"69.5199966430664\",\"70.1500015258789\","
+				+ "\"69.7979965209961\",\"67.2030029296875\",\"60.1599998474121\",\"57.439998626709\",\"56.3190002441406\",\"56.1360015869141\","
+				+ "\"58.1380004882813\",\"59.5169982910156\",\"60.5229988098145\",\"61\","));
+		
+		mapDriver.withOutput(new Text("The percent of change in male employment from 2000 in Ireland is: "), new DoubleWritable(-7));
+		
+		mapDriver.runTest();
+	}
+	
+	@Test
+	public void testReducer(){
+		//write test
+	}
+	
+	@Test
+	public void testMapReduce(){
+		//write test
+	}
+
+}
