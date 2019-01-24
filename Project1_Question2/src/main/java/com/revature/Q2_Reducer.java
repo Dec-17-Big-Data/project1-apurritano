@@ -6,6 +6,15 @@ import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+ * 
+ * @author apurritano
+ *
+ * This reducer method takes the average increase between each year and adds it to a variable.
+ * It then divides that sum by the count of values it took in.
+ * This returns the average increase for each category.
+ */
+
 public class Q2_Reducer extends Reducer<Text, DoubleWritable, Text, DoubleWritable>{
 
 	@Override

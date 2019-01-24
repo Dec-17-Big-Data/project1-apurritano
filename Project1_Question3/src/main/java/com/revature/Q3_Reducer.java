@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.Reducer;
  * 
  * @author apurritano
  * 
- * This reducer method does not do much except for return the key value pairs of the selected data points.
+ * This reducer method returns the key value pairs of the selected data points.
  *
  */
 

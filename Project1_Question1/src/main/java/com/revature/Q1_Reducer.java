@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.Reducer;
  * 
  * @author apurritano
  * 
- * Here I simply reduced the results to only display the graduation ratio's that were less than 30% 
+ * Here I simply reduced the results to return only the graduation ratio's that were less than 30% 
  *
  */
 

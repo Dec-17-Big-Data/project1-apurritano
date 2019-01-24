@@ -55,6 +55,9 @@ public class Q4_Mapper extends Mapper<LongWritable, Text, Text, DoubleWritable> 
 			
 			if (changeEmp != 0){
 				context.write(new Text("The percent of change in female employment from 2000 in " + data[0].replaceAll("^\"|\"$","") + " is: "), new DoubleWritable(changeEmp));
+				
+				//Output used to create graph
+				//context.write(new Text(data[0].replaceAll("^\"|\"$","")), new DoubleWritable(changeEmp));
 			}	
 		}
 	}

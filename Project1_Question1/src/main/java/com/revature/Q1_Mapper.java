@@ -19,7 +19,7 @@ import org.apache.hadoop.mapreduce.Mapper;
  * I then set my variable 'femaleGrads' to the latest data value and set my variable 'year' to the index of the value + 1956.
  * I got 1956 because the first year stated is 1960 and this is the 4th index (1960 - 4 = 1956).
  * Finally I created a write statement to print the county's name replacing unwanted characters, the year of the latest value, and the value.
- * And the write statement only writes the non 0 values assuming that a 0% grad ratio is simply null data.
+ * And the write statement only writes the non 0 values assuming that a 0% graduation ratio is simply null data.
  * 
  */
 
@@ -47,6 +47,8 @@ public class Q1_Mapper extends Mapper<LongWritable, Text, Text, DoubleWritable> 
 		if (femaleGrads != 0.0){
 			context.write(new Text(data[0].replaceAll("^\"|\"$","") + "'s female graduation rate in " + year + ": "), new DoubleWritable(femaleGrads));
 			
+			//Output used to create graph
+			//context.write(new Text(data[0].replaceAll("^\"|\"$","")), new DoubleWritable(femaleGrads));
 			}
 		}
 	}

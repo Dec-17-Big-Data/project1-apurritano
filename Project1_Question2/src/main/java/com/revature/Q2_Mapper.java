@@ -15,8 +15,12 @@ import org.apache.hadoop.mapreduce.Mapper;
  * 
  * The thought process here was a slightly more complicated than the first question.
  * I looked through the data that was available for females in the US;
- * I believed that looking at the percent of females that at least completed a specific 
- * 	level of education was the best available data to use for this question.
+ * I believed that looking at 'Educational attainment, at least completed..' with
+ *  each of the education levels was the best available data to use for this question.
+ * I thought it was a best statistic than 'School Enrollment' because simply being
+ * enrolled in school does not necessarily mean that they passed and graduated and became more educated.
+ * Once you graduate it proves that you became more educated.
+ *
  * 
  * I split data by the commas and created an if statement to only get the USA data.
  * I then located six different categories: 

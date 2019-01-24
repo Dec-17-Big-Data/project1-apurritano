@@ -1,5 +1,9 @@
 package com.revature.test;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -35,19 +39,48 @@ public class Q2_Test {
 	}
 	
 	@Test
-	public void testMapper(){
-		//write test
+	public void testMapper() throws IOException{
+		
+		String str = "\"United States\",\"USA\",\"Educational attainment, at least Bachelor's or equivalent, population 25+, female (%) (cumulative)\","
+				+ "\"SE.TER.CUAT.BA.FE.ZS\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
+				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
+				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"31.7\",\"31.8\",\"31.9\",\"\",";
+
+				
+				mapDriver.withInput(new LongWritable(1), new Text(str));
+				
+				mapDriver.withOutput(new Text("The average increase from year 2000 in females that at least completed their Bachelors Degree: "), new DoubleWritable(.1));
+				
+				mapDriver.run();
 		
 	}
 	
 	@Test
 	public void testReducer(){
-		//write test
+		
+		List<DoubleWritable> values = new ArrayList<DoubleWritable>();
+		values.add(new DoubleWritable(.5));
+		
+		reduceDriver.withInput(new Text("Masters Degree"), values);
+		
+		reduceDriver.withOutput(new Text("Masters Degree"), new DoubleWritable(.5));
+		
+		reduceDriver.runTest();
 	}
 	
 	@Test
-	public void testMapReduce(){
-		//write test
+	public void testMapReduce() throws IOException{
+		
+		String str = "\"United States\",\"USA\",\"Educational attainment, at least Master's or equivalent, population 25+, female (%) (cumulative)\","
+				+ "\"SE.TER.CUAT.MS.FE.ZS\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
+				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
+				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"11.2\",\"11.4\",\"11.6\",\"\",";
+		
+		mapDriver.withInput(new LongWritable(1), new Text(str));
+		
+		mapDriver.withOutput(new Text("The average increase from year 2000 in females that at least completed their Masters Degree: "), new DoubleWritable(.2));
+		
+		mapDriver.run();
 	}
 
 }
